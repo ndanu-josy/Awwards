@@ -63,3 +63,9 @@ class Rating(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def save_review(self):
+        self.save()
+
+    def delete_review(self):
+        self.delete()        
