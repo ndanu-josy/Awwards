@@ -2,7 +2,7 @@ from django.http.response import HttpResponseRedirect
 from awwardsapp.forms import ProjectForm, RegistrationForm, UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from django.http import request
-
+from .models import Project
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
@@ -67,10 +67,16 @@ def new_project(request):
 			new_project = form.save(commit=False)
 			new_project.user = current_user
 			new_project.save()
-            # messages.success(request, "Image uploaded!")
+            
 			return redirect('index')
 	else:
 			form = ProjectForm()
-            # context= {"form":form}
+         
 	return render(request, 'project.html',{"form":form})
+
+@login_required(login_url='/accounts/login')
+def all_projects(request,id):
+    project = Project.objects.get(id = id)
+    
+    return render(request, 'all_projects.html',{"project":project})    
 
