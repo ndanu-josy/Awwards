@@ -16,6 +16,17 @@ import django_heroku
 import dj_database_url
 from decouple import config,Csv
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+  cloud_name = "jos254",
+  api_key = "888584575498376",
+  api_secret = "jS8SX99ro6Cecs2oUxLshigg5ug",
+  secure = True
+)
+
 
 
 MODE=config("MODE", default="dev")
