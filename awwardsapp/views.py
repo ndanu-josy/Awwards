@@ -1,4 +1,4 @@
-from awwardsapp.forms import RegistrationForm
+from awwardsapp.forms import RegistrationForm, UserProfileForm
 from django.contrib.auth.models import User
 from django.http import request
 
@@ -20,7 +20,8 @@ def profile(request, username):
     id= request.user.id 
     form = UserProfileForm()
 
-    return render(request,'index.html')
+    return render(request, 'user/profile.html', {'user_profile':user_profile,"form":form})
+
        
 
 def register(request):
