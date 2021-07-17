@@ -40,18 +40,9 @@ class Project(models.Model):
     def search_projects(cls, name):
         return cls.objects.filter(title__icontains=name).all()
 
-RATES = [
-(1,'1'),
-(2,'2'),
-(3,'3'),
-(4,'4'),
-(5,'5'),
-(6,'6'),
-(7,'7'),
-(8,'8'),
-(9,'9'),
-(10,'10'),
-]
+RATES = [(1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),
+            (7,'7'),(8,'8'),(9,'9'),(10,'10'),]
+            
 class Rating(models.Model):    
     design = models.PositiveSmallIntegerField(choices = RATES,default= 0)
     usability = models.PositiveSmallIntegerField(choices = RATES,default = 0)

@@ -15,9 +15,10 @@ def index(request):
     return render(request,'index.html')
        
 @login_required(login_url='/accounts/login/')
-
-def profile(request):
-    
+def profile(request, username):
+    user_profile= User.objects.get(username=username)
+    id= request.user.id 
+    form = UserProfileForm()
 
     return render(request,'index.html')
        
