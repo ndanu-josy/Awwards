@@ -12,5 +12,7 @@ urlpatterns=[
     url(r'profile/', views.profile, name='profile'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^PostImage/$',views.new_project,name='new-project'),
-    # url(r'^logout/$', views.LogoutView.as_view(), {"next_page": '/'}),
+  
+    url(r'^project_details/(?P<id>\d+)', views.all_projects, name='allProjects'),
+
 ]

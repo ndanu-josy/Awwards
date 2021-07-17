@@ -2,7 +2,7 @@ from django.http.response import HttpResponseRedirect
 from awwardsapp.forms import ProjectForm, RegistrationForm, UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from django.http import request
-from .models import Project
+from .models import Profile, Project
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
@@ -11,9 +11,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
-    
+    profiles = Profile.objects.all()
+    projects = Project.objects.all()
 
-    return render(request,'index.html')
+    return render(request,'index.html', {"profiles":profiles,"projects":projects})
        
 
 # def profile(request):

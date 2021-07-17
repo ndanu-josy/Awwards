@@ -2,7 +2,25 @@
 {% load static %}
 {% load bootstrap3 %}
 {% block content %}
-{{block.super}}
-<h1>Awwards</h1>
-
-{%endblock%}
+<div class="container">
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-4 ">
+            <div class="panel" style="height:360px;margin-bottom:10px;">
+                <div class="panel-body">
+                    <a href="{% url 'allProjects' id=project.id %}">
+                        <img class="img-responsive" src="{{project.image.url}}" style="height:260px;width:100%;">
+                    </a>
+                    <div class="panel-footer">
+                        <div class="text">{{project.title}}</div>
+                        <div class="details"><a href="{% url 'allProjects' id=project.id %}" class="btn btn-primary">View &
+                                Rate</a></div>
+                        <p style="font-size:16px;">By : {{project.user}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
