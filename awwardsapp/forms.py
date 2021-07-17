@@ -1,4 +1,4 @@
-from awwardsapp.models import Profile
+from awwardsapp.models import Profile, Project
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -32,3 +32,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email')
 
 
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        exclude = ['user','profile']
