@@ -18,10 +18,17 @@ class RegistrationForm(UserCreationForm):
             user.save()
         return user  
 
-class UserProfileForm:
+
+
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['projects']
+        exclude = [ 'projects']
+             
 
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
 
 

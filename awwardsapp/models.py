@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 # Create your models here.
 class Profile(models.Model):
-    profile_picture = CloudinaryField('pic')
-    bio = models.CharField(max_length=50)  
+    profile_picture = CloudinaryField('pic', default="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI6LEtiD3hnhE1XMgE5eoafi_JFE5hxp4N4A&usqp=CAU")
+    bio = models.TextField(max_length=200, default="user bio")  
     projects = models.CharField(max_length=50)  
     contact_info = models.CharField(max_length=60,blank=True)
    
@@ -42,7 +42,7 @@ class Project(models.Model):
 
 RATES = [(1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),
             (7,'7'),(8,'8'),(9,'9'),(10,'10'),]
-            
+
 class Rating(models.Model):    
     design = models.PositiveSmallIntegerField(choices = RATES,default= 0)
     usability = models.PositiveSmallIntegerField(choices = RATES,default = 0)
