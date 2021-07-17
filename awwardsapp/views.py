@@ -1,5 +1,5 @@
 from django.http.response import HttpResponseRedirect
-from awwardsapp.forms import RegistrationForm, UserForm, UserProfileForm
+from awwardsapp.forms import ProjectForm, RegistrationForm, UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from django.http import request
 
@@ -58,4 +58,19 @@ def register(request):
         form= RegistrationForm()
     return render(request, 'registration/registration_form.html', {"form":form}) 
 
+@login_required(login_url='/accounts/login')
+def new_project(request):
+	current_user = request.user
+	if request.method == 'POST':
+		form = ProjectForm(request.POST,request.FILES)
+		if form.is_valid():
+			new_project = form.save(commit=False)
+			new_project.user = current_user
+			new_project.save()
+            # messages.success(request, "Image uploaded!")
+			return redirect('index')
+	else:
+			form = ProjectForm()
+            # context= {"form":form}
+	return render(request, 'project.html',{"form":form})
 

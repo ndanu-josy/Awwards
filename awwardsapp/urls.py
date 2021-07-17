@@ -11,6 +11,6 @@ urlpatterns=[
     url('login/', auth_views.LoginView.as_view(), name='login'),
     url(r'profile/', views.profile, name='profile'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    
+    url(r'^upload/$',views.new_project,name='new-project'),
     # url(r'^logout/$', views.LogoutView.as_view(), {"next_page": '/'}),
 ]
