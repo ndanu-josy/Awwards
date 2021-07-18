@@ -1,0 +1,126 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="container">
+  <div class="row" style="margin-top:120px;">
+    <div class="col-md-1"></div>
+    <div class="col-sm-12 col-md-5 col-lg-4">
+
+      <div class="card" style="height:340px;width:150%;margin-bottom:10px;">
+        <div class="card-body">
+
+          <a href="{% url 'allProjects' id=project.id %}">
+
+            <img class="card-img-top mb-10" src="{{project.image.url}}" style="height:300px;">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <!-- Empty div -->
+    </div>
+    <div class="col-md-4">
+      <div class="card" style="height:340px;margin-bottom:10px;">
+        <div class="card-body">
+          <p> <b>Title : </b> {{project.title}} </p>
+          <p>
+            {% autoescape off %}
+            <b>Description : </b> {{ project.description }}
+            {% endautoescape %}
+          </p>
+          <br>
+          <a href="{% url 'review' project_id=project.id%}" class="btn btn-info btn-block"
+            style="margin-top:4px;">Rate</a>
+          <a href="{{project.link}}" class="btn btn-success btn-block" target="_blank">Visit Site</a>
+          <br>
+          <b> Posted:</b> {{project.timestamp | timesince }} ago
+        </div>
+      </div>
+    </div>
+  </div>
+    <br>
+  <div class="row">
+    {% if reviews %}
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <p class="text-center">DESIGN</p>
+      <div class="main-container">
+        <div class="motion-container">
+          <div class="motion-item circle one"></div>
+          <div class="motion-item circle two"></div>
+
+          <h style="color:white;">{{project.avg_design |floatformat}}</h>
+          <div class="motion-item circle five"></div>
+
+          <div class="motion-item circle seven"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <p class="text-center">USABILITY</p>
+      <div class="main-container">
+        <div class="motion-container">
+          <div class="motion-item circle one"></div>
+          <div class="motion-item circle two"></div>
+
+          <div class="motion-item circle four"></div>
+          <h style="color:white;">{{project.avg_usability |floatformat}}</h>
+          <div class="motion-item circle six"></div>
+          <div class="motion-item circle seven"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <p class="text-center">CONTENT</p>
+      <div class="main-container">
+        <div class="motion-container">
+          <div class="motion-item circle one"></div>
+          <div class="motion-item circle two"></div>
+
+          <h style="color:white;"> {{project.avg_content |floatformat}}</h>
+
+          <div class="motion-item circle seven"></div>
+        </div>
+      </div>
+      {%else%}
+      <h3 style="padding-left:400px;">This project has no ratings</h3>
+      {%endif%}
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <br>
+  <br>
+  <div class="container">
+    {% for review in reviews %}
+    <div class="row">
+      {% if project.id == review.project.id %}
+      <div class="col-md-2"> <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3AeEIETd1WF-w7g5xkFdUfvcX0FK7tH5gV7qiidS1iW4hJFAzzw"
+          style="height:40px;width:40px;border-radius:50%">
+        Rating by : <b> {{review.user.username}}</b></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-info btn-lg">{{review.design}}</button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary btn-lg">
+          {{review.usability}}
+
+        </button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-success btn-lg">{{review.content}}</button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-secondary btn-lg">{{review.average}}</button>
+      </div>
+      {%endif%}
+    </div>
+    <hr>
+    <br>
+    {% endfor %}
+    </p>
+  </div>
+</div>
+{% endblock %}
