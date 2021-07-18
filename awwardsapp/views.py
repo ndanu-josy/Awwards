@@ -75,6 +75,21 @@ def new_project(request):
          
 	return render(request, 'project.html',{"form":form})
 
+def searchproject(request): 
+    if 'project' in request.GET and request.GET['project']:
+        name = request.GET.get("project")
+        searchResults = Project.search_projects(name)
+        message = f'name'
+        params = {
+            'results': searchResults,
+            'message': message
+        }
+        return render(request, 'search.html', params)
+    else:
+        message = "You haven't searched for any project"
+    return render(request, 'search.html', {'message': message})
+
+
 @login_required(login_url='/accounts/login')
 def all_projects(request,id):
     project = Project.objects.get(id = id)
@@ -92,11 +107,7 @@ def review_project(request,project_id):
     if request.method == 'POST':
         form = RatingForm(request.POST)
         if form.is_valid():
-            # reviews = form.save(commit=False)
-            # reviews.project = project
-            # reviews.user = current_user
-            # reviews.save()
-
+           
             design = form.cleaned_data['design']
             usability = form.cleaned_data['usability']
             content = form.cleaned_data['content']
