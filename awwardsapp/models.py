@@ -65,3 +65,10 @@ class Rating(models.Model):
 
     def delete_review(self):
         self.delete()        
+
+
+class APIProfile(models.Model):
+    name = models.CharField(max_length=40)
+    bio = models.TextField()
+    projects = models.CharField(max_length=50)  
+    profile_picture = CloudinaryField('pic')  

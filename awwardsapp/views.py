@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
+
+
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -74,7 +76,7 @@ def new_project(request):
 			form = ProjectForm()
          
 	return render(request, 'project.html',{"form":form})
-    
+
 
 def searchproject(request): 
     if 'project' in request.GET and request.GET['project']:
