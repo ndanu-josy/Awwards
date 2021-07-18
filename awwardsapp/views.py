@@ -74,6 +74,7 @@ def new_project(request):
 			form = ProjectForm()
          
 	return render(request, 'project.html',{"form":form})
+    
 
 def searchproject(request): 
     if 'project' in request.GET and request.GET['project']:

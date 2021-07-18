@@ -16,4 +16,5 @@ urlpatterns=[
     url(r'^project_details/(?P<id>\d+)', views.all_projects, name='allProjects'),
     
     url(r'^review/(?P<project_id>\d+)', views.review_project, name='review'),
+     url('search/', views.searchproject, name='search'),
 ]
