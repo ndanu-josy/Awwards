@@ -1,4 +1,4 @@
-from awwardsapp.models import Profile, Project
+from awwardsapp.models import Profile, Project, Rating
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -36,3 +36,9 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ['user','profile']
+
+
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        exclude = ['user','project','average' 'date']        
