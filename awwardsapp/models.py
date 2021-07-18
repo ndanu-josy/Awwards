@@ -7,7 +7,8 @@ class Profile(models.Model):
     bio = models.TextField(max_length=200, default="user bio")  
     projects = models.CharField(max_length=50)  
     contact_info = models.CharField(max_length=60,blank=True)
-   
+    user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True,related_name="profile")
+
     def __str__(self):
         return self.user.username
  
@@ -55,7 +56,7 @@ class Rating(models.Model):
     user = models.ForeignKey(User,null=True,blank=True, on_delete=models.CASCADE)
     project = models.ForeignKey(Project,null=True,on_delete=models.CASCADE)
     average =  models.DecimalField(default=1,blank=False,decimal_places=2,max_digits=20)
-    date = models.DateTimeField(auto_now_add=True)
+   
 
     def __str__(self):
         return self.user.username
@@ -67,8 +68,3 @@ class Rating(models.Model):
         self.delete()        
 
 
-class APIProfile(models.Model):
-    name = models.CharField(max_length=40)
-    bio = models.TextField()
-    projects = models.CharField(max_length=50)  
-    profile_picture = CloudinaryField('pic')  

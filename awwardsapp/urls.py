@@ -17,5 +17,6 @@ urlpatterns=[
     
     url(r'^review/(?P<project_id>\d+)', views.review_project, name='review'),
     url('search/', views.searchproject, name='search'),
-    url(r'^api/merch/$', views.ProjectList.as_view())
+    url(r'^api/projectApi/$', views.ProjectList.as_view()),
+    url(r'^api/profileApi/$', views.ProfileList.as_view())
 ]
