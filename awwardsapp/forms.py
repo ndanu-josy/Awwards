@@ -41,4 +41,4 @@ class ProjectForm(forms.ModelForm):
 class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
-        exclude = ['user','project','average' 'date']        
+        exclude = ['user','project','average', 'date']        

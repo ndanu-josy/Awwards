@@ -1,4 +1,3 @@
-from typing import Reversible
 from django.http.response import HttpResponseRedirect
 from awwardsapp.forms import ProjectForm, RegistrationForm, UserForm, UserProfileForm,RatingForm
 from django.contrib.auth.models import User
@@ -7,15 +6,15 @@ from .models import Profile, Project, Rating
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
-
+from django.urls import reverse
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
     profiles = Profile.objects.all()
     projects = Project.objects.all()
-
-    return render(request,'index.html', {"profiles":profiles,"projects":projects})
+    reviews = Rating.objects.all()
+    return render(request,'index.html', {"profiles":profiles,"projects":projects, "reviews":reviews})
        
 
 # def profile(request):
@@ -79,30 +78,41 @@ def new_project(request):
 @login_required(login_url='/accounts/login')
 def all_projects(request,id):
     project = Project.objects.get(id = id)
-    
-    return render(request, 'all_projects.html',{"project":project})    
+   
+    reviews = Rating.objects.all()
+
+    return render(request, 'all_projects.html',{"project":project, "reviews":reviews})    
 
 @login_required(login_url='/accounts/login/')
-def review(request,project_id):
+def review_project(request,project_id):
+    reviews = Rating()
     proj = Project.project_by_id(id=project_id)
     project = get_object_or_404(Project, pk=project_id)
     current_user = request.user
     if request.method == 'POST':
-        form =RatingForm(request.POST)
+        form = RatingForm(request.POST)
         if form.is_valid():
+            # reviews = form.save(commit=False)
+            # reviews.project = project
+            # reviews.user = current_user
+            # reviews.save()
+
             design = form.cleaned_data['design']
             usability = form.cleaned_data['usability']
             content = form.cleaned_data['content']
-            review = Rating()
-            review.project = project
-            review.user = current_user
-            review.design = design
-            review.usability = usability
-            review.content = content
-            review.average = (review.design + review.usability + review.content)/3
-            review.save()
+            reviews = Rating()
+            reviews.project = project
+            reviews.user = current_user
+            reviews.design = design
+            reviews.usability = usability
+            reviews.content = content
+            reviews.average = (reviews.design + reviews.usability + reviews.content)/3
+            print(reviews.average)
+            print(reviews.usability)
+            reviews.save()
+
             # return redirect('index')
-            return HttpResponseRedirect(Reversible('allProjects', args=(project.id,)))
+            return HttpResponseRedirect(reverse('allProjects', args=(project.id,)))
     else:
         form = RatingForm()
-    return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form})
+    return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form, "reviews":reviews })

@@ -14,5 +14,6 @@ urlpatterns=[
     url(r'^PostImage/$',views.new_project,name='new-project'),
   
     url(r'^project_details/(?P<id>\d+)', views.all_projects, name='allProjects'),
-
+    
+    url(r'^review/(?P<project_id>\d+)', views.review_project, name='review'),
 ]

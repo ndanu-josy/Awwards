@@ -34,7 +34,12 @@ class Project(models.Model):
         self.user
 
     def delete_projects(self):
-        self.delete()    
+        self.delete()  
+
+    classmethod
+    def project_by_id(id):
+        project = Project.objects.filter(id =id)
+        return project      
 
     @classmethod
     def search_projects(cls, name):
