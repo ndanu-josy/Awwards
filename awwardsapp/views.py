@@ -8,7 +8,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
-
+from rest_framework.response import Response
+from rest_framework.views import APIView
+# from .models import  MoringaMerch
+from .serializer import ProjectSerializer
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -130,3 +133,11 @@ def review_project(request,project_id):
     else:
         form = RatingForm()
     return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form, "reviews":reviews })
+
+
+
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        all_projects = Project.objects.all()
+        serializers = ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
