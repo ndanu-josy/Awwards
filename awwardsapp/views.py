@@ -1,8 +1,9 @@
+from typing import Reversible
 from django.http.response import HttpResponseRedirect
-from awwardsapp.forms import ProjectForm, RegistrationForm, UserForm, UserProfileForm
+from awwardsapp.forms import ProjectForm, RegistrationForm, UserForm, UserProfileForm,RatingForm
 from django.contrib.auth.models import User
 from django.http import request
-from .models import Profile, Project
+from .models import Profile, Project, Rating
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
@@ -81,3 +82,27 @@ def all_projects(request,id):
     
     return render(request, 'all_projects.html',{"project":project})    
 
+@login_required(login_url='/accounts/login/')
+def review(request,project_id):
+    proj = Project.project_by_id(id=project_id)
+    project = get_object_or_404(Project, pk=project_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form =RatingForm(request.POST)
+        if form.is_valid():
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            content = form.cleaned_data['content']
+            review = Rating()
+            review.project = project
+            review.user = current_user
+            review.design = design
+            review.usability = usability
+            review.content = content
+            review.average = (review.design + review.usability + review.content)/3
+            review.save()
+            # return redirect('index')
+            return HttpResponseRedirect(Reversible('allProjects', args=(project.id,)))
+    else:
+        form = RatingForm()
+    return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form})
