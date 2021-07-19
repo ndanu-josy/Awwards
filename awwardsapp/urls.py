@@ -4,6 +4,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns=[  
     url(r'^$',views.index,name='index'),
@@ -18,5 +19,6 @@ urlpatterns=[
     url(r'^review/(?P<project_id>\d+)', views.review_project, name='review'),
     url('search/', views.searchproject, name='search'),
     url(r'^api/projectApi/$', views.ProjectList.as_view()),
-    url(r'^api/profileApi/$', views.ProfileList.as_view())
+    url(r'^api/profileApi/$', views.ProfileList.as_view()),
+      url(r'^api-token-auth/', obtain_auth_token),
 ]

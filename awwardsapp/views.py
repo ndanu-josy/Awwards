@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 # from .models import  MoringaMerch
 from .serializer import ProfileSerializer, ProjectSerializer
 from rest_framework import status
-
+from .permissions import IsAdminOrReadOnly
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -149,7 +149,8 @@ class ProjectList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
+     
+    permission_classes = (IsAdminOrReadOnly,)
 
 class ProfileList(APIView):
     def get(self, request, format=None):
@@ -164,4 +165,5 @@ class ProfileList(APIView):
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    permission_classes = (IsAdminOrReadOnly,)
            
