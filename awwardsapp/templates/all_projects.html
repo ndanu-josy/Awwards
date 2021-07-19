@@ -1,20 +1,20 @@
 {%extends 'base.html'%}
 {% block content %}
-<div class="container">
+<div class="container" >
   <div class="row">
-
-    <div class=" col-lg-11 text-center" style="height: 500px;">
-      <div class="panel" style="height:500px;margin-bottom:20px;">
+    <div class=" col-md-1"></div>
+    <div class=" col-lg-9 text-center" style="height: 500px; ">
+      <div class="panel" style="height:450px;">
         <div class="panel-body">
           <a href="{% url 'allProjects' id=project.id %}">
-            <img class="img-responsive" src="{{project.image.url}}" style="height:350px;width:100%;">
+            <img class="img-responsive" src="{{project.image.url}}" style="height:450px;width:100%;">
           </a>
           <div class="panel-footer">
             <div class="text"> <b>Application Name:</b>{{project.title}}</div>
             <br>
             <div>
-              <a href="{{project.link}}" class="btn btn-primary">View</a>
-              <a href="{% url 'review' project_id=project.id%}" class="btn btn-primary">Rate</a>
+              <a href="{{project.link}}" class="btn btn-info">View</a>
+              <a href="{% url 'review' project_id=project.id%}" class="btn btn-info">Rate</a>
             </div>
             <br>
             <p><b>Posted By: </b>{{project.user}}</p>
@@ -26,66 +26,39 @@
   </div>
   <br>
   <br>
+</div>
+
+<div class="container" style="margin-top:100px; background-color: black; color: white;">
   <div class="row">
-    {% if reviews %}
-    <div class="col-md-3">
-      <p class="text-center">REVIEWER</p>
-      
-    </div>
-
-    <div class="col-md-3">
-      <p class="text-center">DESIGN</p>
-      <p>{{project.avg_design |floatformat}}</p>
-    </div>
-
-
-    <div class="col-md-3">
-      <p class="text-center">USABILITY</p>
-      <p>{{project.avg_usability |floatformat}}</p>
-    </div>
-
-
-    <div class="col-md-3">
-      <p class="text-center">CONTENT</p>
-      <p> {{project.avg_content |floatformat}}</p>
+    <div class=" col-md-1"></div>
+    <div class="container col-md-9">
+      <table class="table table-dark  ">
+        <thead>
+          <tr>
+            <th scope="col">Reviewer</th>
+            <th scope="col">Design</th>
+            <th scope="col">Usability</th>
+            <th scope="col">Content</th>
+            <th scope="col">Average</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for review in reviews %}
+          <tr>
+            {% if project.id == review.project.id %}
+            <!-- <th scope="row"></th> -->
+            <td>{{review.user.username}}</td>
+            <td>{{review.design}}</td>
+            <td>{{review.usability}}</td>
+            <td>{{review.content}}</td>
+            <td>{{review.average}}</td>
+          </tr>
+          {%endif%}
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-  {%else%}
-  <h3 style="padding-left:400px;">This project has no ratings</h3>
-  {%endif%}
 </div>
-<div class="col-md-1"></div>
-</div>
-<br>
-<br>
-<div class="container">
-  {% for review in reviews %}
-  <div class="row">
-    {% if project.id == review.project.id %}
-    <div>
-      Rating by : <b> {{review.user.username}}</b></div>
-    <div class="col-md-2"></div>
-    <div class="col-md-2">
-      <button type="button" class="btn btn-info btn-lg">{{review.design}}</button>
-    </div>
-    <div class="col-md-2">
-      <button type="button" class="btn btn-primary btn-lg">
-        {{review.usability}}
 
-      </button>
-    </div>
-    <div class="col-md-2">
-      <button type="button" class="btn btn-success btn-lg">{{review.content}}</button>
-    </div>
-    <div class="col-md-2">
-      <button type="button" class="btn btn-secondary btn-lg">{{review.average}}</button>
-    </div>
-    {%endif%}
-  </div>
-  <hr>
-  <br>
-  {% endfor %}
-  </p>
-</div>
-</div>
 {% endblock %}

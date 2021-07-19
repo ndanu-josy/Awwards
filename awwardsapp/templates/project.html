@@ -2,13 +2,17 @@
 {% load bootstrap3 %}
 {% block content %}
 <div class="container">
-    <div class="row">
-<div class="col-md-3"></div>
+    <div class="row" style="margin-top: 5px;">
+        <div class="jumbotron" style="background-color: white;">
+       <h2 class="text-center" >SUBMIT YOUR SITE</h2>
+       <p>Every month, more than 2,000,000 unique users who specialize in web design, development and the latest web technologies, visit our site looking for inspiration, trends and talent on the web.</p>
+    </div>
+       <div class="col-md-3"></div>
 
         <div class="col-md-6 panel panel-default">
 
             <div class="panel-heading">
-                <h3 class="text-center">Add Project</h3>
+                <h3 class="text-center">Submit Project</h3>
             </div>
             <div class="panel-body">
 
@@ -16,7 +20,7 @@
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-sm" value="Post">
+                        <input type="submit" class="btn btn-primary btn-sm" value="Submit">
                     </div>
                     <input type="hidden" name="next" value="{{next}}">
 
