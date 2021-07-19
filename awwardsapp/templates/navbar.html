@@ -19,7 +19,10 @@
   <nav class="navbar navbar">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">Awwards</a>
+        <a href="{% url 'index' %}">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS0AAACnCAMAAABzYfrWAAAAe1BMVEX///8AAACFhYW8vLxaWlqhoaGenp7c3Nzt7e3p6en8/Pz09PSoqKh2dnb4+Pj19fUtLS02NjZDQ0NsbGzDw8N6enrh4eE7Ozutra1SUlK4uLhNTU3X19cmJiZmZmZwcHDNzc2VlZUiIiIbGxuPj48TExNHR0cLCwuBgYHRAw0oAAAJ00lEQVR4nO2b63LiOBCFMRiwMXcIBELADiHJ+z/hYqlvkk2A2qmamqrz/dmhLdvSUXdLamc7HQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPMxm0K8ZlH+7I/8EvcTz87c78k/AanX/dkf+CaDWM0CtZ4BazwC1ngFqPQPUegao9QxQ6xn+tFqjYvqHnvTHmc1GD7QqimYrGdRNtbIszx55uiEfHxfn5PKxPY43al2PHX1jGva9zdz7Wje5nleNiY+wmZrGztKvjKmgVkM1lWQ6iGXWm2w/vpPzIq3U6LsSnJN76TxJzstB0CDdXge1OPZGt9Q6vLzXxstx/as8AZtjYljKna9kmWjTCZlyHTNZduaBXbL1xDLip5tW++YAdmTi+Sn4SY73fqfl9s+6pxf6kcrl8k1vvOxb1SpWpsnrg2J9JhFH8t6Mfi+07YJM+mzuxt48cUm2F+17w6KaLsUy+vaWLf1exz2bGz/kF1/V0tmu6OLsGN64alFr8x00SR9KRKe4S1d56EaeHgkf1s+42wtZCn2iONJFTBVZSvPieRLfeiADxdO42bNE5eLxVx3jRRQX+SW+79xQq4ibLB6Q66elS+zQ3F3xG/b+5F3uJ2+zgVjKc0TmLRlMK1E+kdAfkMEHYsOzHCItqzWw0epfOGuIJahaaePa112xypYnij45/Tpx6xdpwImLx2zDvpJWnLim9NtkQCOGjODL//aRP2vv2TFW681e9ZfeWu6L39Uy8PTu2siJKNkeV8et3Dj3VykBfTRai7uxt+XmmdpZ7hsrY5ceTZecuFifz/D6R7pamfHzCtBLmviYeLWmr2XQQtSSDL9b0bDtVLYzpFsWPh9sxD1L9zsMDRM88uhTOGCHtuKA5WCxk6dTk8y8hafb9+WDfnmvnVbxeAO1zv28KLKxT3iavb/Kay6arnWSVa13/3tbR3Zex8znXbFYjrkY0uCpm6DHmrZUB3qpXdsP2oqzDCX0o2llk2zpTZ/20cPwmiZRfrNVK3AL7SWvkB1NbawWv77ke4LdyQ1G+b57dVXd+PFQKePRrFDW17TFocdy1s7HjlOZVuugaz3TyuYNmlaKGf+hYZStq/RiV3z2kKyhlt2X6KbN3ruKbdwlziDDzqPM7C6Z3XhkR34ZBf2t8YmLUoTzzT692S42vnOctuolulw3NX0LBlBqZ0Ybs/fnuTrEapn9YMesDmdjFE9mtaY0zkHnf/FuRqbx4KQ3aYvnkzaBzuWXFK+2lR8IBYLz0O7Kt/qyzVziWjcHGcB7HVpoVa0yaCZOa49nsmbE62/Y6lFGReaYhWoFecn3b+59Z26VqQOxoFRPsbwyj6GtoVPz4ld52lNMzHhJ08bSRD0r+NT1Gqk1D5tXbM+sladd1OIFLFn0s85TbAY7XoEEWgZpTtzm00/ukXwgV2XcDuOVkgBlY3LEOu7YJwvf67XRdOhnw/nmwignSu1XNvwdg0ityDs4YINlujO6RGrZ7dxy8LhgZbgjISjtcdafynDGlAPqxNX3/3RZOiUP9E6VdvRSzyhe0cro77xQKL8ZTc0uI2d3+lUtUyKhfjhWoXkZqRXt19KownGDUXT+jNTiKDrIcDa0U/rRntVvqg+HLia8aUxzXB+Qf9hEik/lzhUvE1NZ+E/aNQmW39WKBsT7uKiSdWxYo2NomnfuUrwn7bBa5NgVd++dE8xcjs9n6fxG9hQbHs1IBK+93Z2laq/0S9KeD1elFIO0ymP3K7+oFUbcTbVemtbDPHxweVetW2KJWrTEfLGLnMSU8z9cDyakKTmLJIaSBXGjcvO5k6Sb8cZ1IDtYOTU3Ckk31Ao3W23lIseqTcN9qNe9aGytQARqcXosKG3tZT3r8YDcnLh/ffNRqI4nP8mfHGIDHUpGUbCQHuxYU9nu3zjuN9WKa8c38tauvXVpU2O0usboDmo7LvMaiUzZ3NJJsKTkXseTP+P+8PG5bkWrwYHSVh1sXssvDrE6LVDojimLdHXQrKkUh8zRvLepe5bxuCK14v1l+5rIrtv8ijHtyeY/+b3g3OdmeqRk3xS1aMPw6f/rtpsVzYS/4lyedOgaTck7qJWftyUN5CKd47XjpDfWcLHIH3sdHAd31Kr4zqC4x89r/eYz5F3K73/dxevhVixyRBC1KO7euiorORItKqVr5vPC2buIL/EErfwJl6aHZsBt4X1PKz9LUlSUo7GuVOwCd9SSupmtfcsCaNQqFzpG2m7GK0YIHwrVtWRZ1WOm1+H7otJQ/ZxmZGQ7Pzd92hkLPS+3rfzxsPIy+wtSVKyoG3oGFG+7o5Zkl621coIRterilKY28lsu5E3Hx7TbyPlJ/EZNZM0CuMPHhd2j0SuntpXTVOM8cfnfYRch725BOpc9Na+IWv2V7HJHLS2cmU2+LLCkVu5dQPIUqUW+Re556oTweYcDINdjhqplK1HeHYLqJL/RKujdzRa6eE4rYzs0ZNZIkJ0ppy39mnVPLZ2kxre+uG4newYSwuctPlPGaUxG6M4shXUGU/AxJRiqr+WmISdToyAP2rQqyTQ0Njrj6JJkRi55y20pRr15o9FNtcwJsOu0zswugWZNDntVnTsz1mEfjTc8PurmfzE5hbV/o5YpmfJc6KZWvncaF+Sapfm6KQ+7NO40BxxN6ZoSzqdJGnz5u6dWpzKNd6dJMC5Sy7j9W6o172k0yeGBPahYhQzbWn3zkVdnS1ce7RVrqu6mG2st+nJXtOc2Lwf1r4C7anXmN+9tzQiCn2UTOFGtvnmkbuy3rA7iSJr59aur+ghbJD0kpbRSbbh2MBJ3kzp6p+1r4jd17b5am8a9gqyJLeUN3sqrJSrWNz7aLQryequWBKx4poSd+eoqc6IfK+Sx5mFsks9uGrBBcbzxDf0weVStlmNT86zdbbThPKAVrKgYFE9DOuUF2PY8b97NT7SRPW/Y+BRiz2w8qVoj5YAN6+vRx+TvAy92D6jVGUbBeGo5Ve7DJgtJ6eLWaeO5me1UvTnsNtViBfV7vsyMLQrxpkY15T72TCvuiyY8nrH4i15levYyFY95RK3rPsJ+3R+0/p8rmakJXey0U05Ztn27Pvy4iXg/7t3V9WlyZRXUxl536ZWdGc7QtZoEx67hW+ow/fGWN/va2c7bzJ+ZHL2lsXnOBi7Xn5e+dD5d1a880S6q3B2Px5X8bDBad93u8Xs7KOo/UHLv2IWZqHg9zj8ul8WpF957OM3fv27+jVKRZ8Wta3+XaZY/+ZHBUlzvvvuXM6Mn/zQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHiO/wCTNm5neFH01QAAAABJRU5ErkJggg=="
+            style="height: 60px;">
+        </a>
       </div>
 
       <!-- Adding a search form  -->
@@ -49,7 +52,9 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li>
-                <a href="/">Home</a>
+                <a href="/">
+                Home
+                </a>
               </li>
               <li>
                 <a href="{%url 'new-project'%}">Add Project</a>
