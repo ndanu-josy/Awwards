@@ -13,7 +13,7 @@ class Profile(models.Model):
         return self.user.username
  
     def save_profile(self):
-        self.user
+        self.save()
 
     def delete_profile(self):
         self.delete()    
@@ -32,7 +32,7 @@ class Project(models.Model):
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
 
     def save_projects(self):
-        self.user
+        self.save()
 
     def delete_projects(self):
         self.delete()  
