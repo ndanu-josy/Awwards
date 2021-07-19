@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 # Create your models here.
 class Profile(models.Model):
-    profile_picture = CloudinaryField('pic', default="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI6LEtiD3hnhE1XMgE5eoafi_JFE5hxp4N4A&usqp=CAU")
+    profile_picture = CloudinaryField('pic')
     bio = models.TextField(max_length=200, default="user bio")  
     projects = models.CharField(max_length=50)  
     contact_info = models.CharField(max_length=60,blank=True)

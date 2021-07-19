@@ -85,7 +85,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'cloudinary',
-    'awwardsapp',
+    'awwardsapp.apps.AwwardsappConfig',
     'rest_framework',
     'rest_framework.authtoken',
 ]
